@@ -1,0 +1,62 @@
+lua-bit
+------------------------------------------
+bitlib is a Lua library for bitwise operations.
+
+Runtime requirements:
+  cygwin-1.5.25-7
+  lua-5.1.3-1
+
+Build requirements:
+  autoconf2.5-2.61-1
+  automake1.10-1.10-1
+  binutils-20060817-1
+  cygport-0.3.8-1
+  gawk-3.1.6-1
+  gcc-core-3.4.4-3
+  libtool1.5-1.5.23a-2
+  make-3.81-1
+  pkg-config-0.21-1
+  sed-4.1.5-2
+
+Canonical website:
+  http://luaforge.net/projects/bitlib/
+
+Canonical download:
+  http://luaforge.net/projects/bitlib/
+
+-------------------------------------------
+
+Build instructions:
+  unpack lua-bit-25-X-src.tar.bz2
+    if you use setup to install this src package, it will be
+	 unpacked under /usr/src automatically
+  cd /usr/src
+  cygport ./lua-bit-25-X.cygport all
+
+This will create:
+  /usr/src/lua-bit-25-X-src.tar.bz2
+  /usr/src/lua-bit-25-X.tar.bz2
+
+-------------------------------------------
+
+Files included in the binary package:
+
+  /usr/lib/lua/5.1/bit.dll
+  /usr/lib/lua/5.1/bit.la
+  /usr/share/doc/lua-bit-25/AUTHORS
+  /usr/share/doc/lua-bit-25/COPYING
+  /usr/share/doc/lua-bit-25/ChangeLog
+  /usr/share/doc/lua-bit-25/INSTALL
+  /usr/share/doc/lua-bit-25/NEWS
+  /usr/share/doc/lua-bit-25/README
+
+------------------
+
+Port Notes:
+
+----- version 25-1 -----
+Initial release for Cygwin.
+
+
+Cygwin port maintained by:
+http://cygwinports.dotsrc.org/

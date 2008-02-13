@@ -1,0 +1,9 @@
+inherit lua
+
+ORIG_PN="bitlib"
+
+DESCRIPTION="Lua bit manipulation library"
+HOMEPAGE="http://luaforge.net/projects/bitlib/"
+SRC_URI="http://luaforge.net/frs/download.php/3065/${ORIG_PN}-${PV}.tar.gz"
+
+CYGCONF_ARGS="--disable-static"
