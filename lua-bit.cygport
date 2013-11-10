@@ -1,7 +1,7 @@
 inherit lua
 
 NAME="lua-bit"
-VERSION=1.0.1
+VERSION=1.0.2
 RELEASE=1
 CATEGORY="Lua"
 SUMMARY="Lua bitwise operation library"
@@ -10,12 +10,17 @@ operations on numbers."
 HOMEPAGE="http://bitop.luajit.org/"
 SRC_URI="http://bitop.luajit.org/download/LuaBitOp-${VERSION}.tar.gz"
 SRC_DIR="LuaBitOp-${VERSION}"
-PATCH_URI="1.0.1-link-liblua.patch"
+PATCH_URI="1.0.2-link-liblua.patch"
 
 src_compile() {
 	lndirs
 	cd ${B}
 	cygmake MODSO="bit.dll" LIBS=${LUA_LIBS}
+}
+
+src_test() {
+	cd ${B}
+	cygmake test MODSO="bit.dll"
 }
 
 src_install() {

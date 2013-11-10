@@ -1,0 +1,11 @@
+--- origsrc/LuaBitOp-1.0.2/Makefile	2012-05-08 14:15:00.000000000 -0500
++++ src/LuaBitOp-1.0.2/Makefile	2013-11-10 15:18:44.068600400 -0600
+@@ -36,7 +36,7 @@ $(MODNAME).o: $(MODNAME).c
+ 	$(CC) $(SOCFLAGS) -c -o $@ $<
+ 
+ $(MODSO): $(MODNAME).o
+-	$(SOCC) $(SOLDFLAGS) -o $@ $<
++	$(SOCC) $(SOLDFLAGS) -o $@ $< $(LIBS)
+ 
+ install: $(MODSO)
+ 	$(INSTALL) $< `$(INSTALLPATH) $(MODNAME)`
