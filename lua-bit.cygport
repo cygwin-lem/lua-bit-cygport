@@ -11,6 +11,8 @@ HOMEPAGE="https://bitop.luajit.org/"
 SRC_URI="https://bitop.luajit.org/download/LuaBitOp-${VERSION}.tar.gz"
 SRC_DIR="LuaBitOp-${VERSION}"
 
+SRC_URI+=" https.sed"
+
 ################################
 LUA_VERSIONS="5.1:5.2"
 LUA_PKG_NAME="${NAME#lua-}"
@@ -70,6 +72,10 @@ src_install_lua() {
   doexe bit.so
 
   dodoc README doc/
+
+  find ${D}/usr/share/doc/lua${LUA_VERSION_CYG}-${LUA_PKG_NAME} \
+    -type f -print0 \
+  | xargs -r -0 sed -f https.sed -i
 }
 
 ################################
