@@ -7,8 +7,8 @@ CATEGORY="Lua"
 SUMMARY="Lua bitwise operation library"
 DESCRIPTION="Lua BitOp is a C extension module for Lua 5.1 which adds bitwise
 operations on numbers."
-HOMEPAGE="http://bitop.luajit.org/"
-SRC_URI="http://bitop.luajit.org/download/LuaBitOp-${VERSION}.tar.gz"
+HOMEPAGE="https://bitop.luajit.org/"
+SRC_URI="https://bitop.luajit.org/download/LuaBitOp-${VERSION}.tar.gz"
 SRC_DIR="LuaBitOp-${VERSION}"
 PATCH_URI="1.0.2-link-liblua.patch"
 
