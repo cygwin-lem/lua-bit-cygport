@@ -1,29 +1,85 @@
-inherit lua
-
 NAME="lua-bit"
 VERSION=1.0.2
 RELEASE=2
 CATEGORY="Lua"
 SUMMARY="Lua bitwise operation library"
-DESCRIPTION="Lua BitOp is a C extension module for Lua 5.1 which adds bitwise
-operations on numbers."
+DESCRIPTION="\
+Lua BitOp is a C extension module for Lua 5.1/5.2 which adds
+bitwise operations on numbers.
+"
 HOMEPAGE="https://bitop.luajit.org/"
 SRC_URI="https://bitop.luajit.org/download/LuaBitOp-${VERSION}.tar.gz"
 SRC_DIR="LuaBitOp-${VERSION}"
-PATCH_URI="1.0.2-link-liblua.patch"
 
-src_compile() {
-	lndirs
-	cd ${B}
-	cygmake MODSO="bit.dll" LIBS=${LUA_LIBS}
+################################
+LUA_VERSIONS="5.1:5.2"
+LUA_PKG_NAME="${NAME#lua-}"
+source lua.experiment
+
+################################
+## Patch files
+################################
+# Patch filenames are in a default style of 'git format-patch'
+PATCH_URI=$(\
+  find -maxdepth 1 -type f -name '[0-9][0-9][0-9][0-9]-*.patch' \
+  | sort \
+)
+# Additional patches, if any
+PATCH_URI+="
+  1.0.2-link-liblua.patch
+"
+
+################################
+## Requirements for building
+################################
+BUILD_REQUIRES="\
+  lua51-devel\
+  lua52-devel\
+"
+# TEST_REQUIRES="\
+# "
+
+################################
+ABI=0
+
+
+################################
+_CYGPORT_RESTRICT_postinst_doc_=1
+
+set_packages_lua_versions ${LUA_VERSIONS} ${LUA_PKG_NAME}
+
+################################
+src_compile_lua() {
+  mkdir -p ${B}/${LUA_VERSION}
+  cd  ${B}/${LUA_VERSION}
+
+  lndirs ${S} .
+
+  cygmake \
+    LUA="lua${LUA_VERSION}" \
+    INCLUDES="-I${LUA_INCLUDEDIR}" \
+    LIBS="${LUA_LIBS}" \
+  ;
 }
 
-src_test() {
-	cd ${B}
-	cygmake test MODSO="bit.dll"
+################################
+src_install_lua() {
+  cd ${B}/${LUA_VERSION}
+
+  exeinto ${LUA_LIBDIR}
+  doexe bit.so
+
+  dodoc README doc/
 }
 
-src_install() {
-	cd ${B}
-	dolua bit.dll
+################################
+src_test_lua() {
+  cd ${B}/${LUA_VERSION}
+
+  cygmake test\
+    LUA="lua${LUA_VERSION}" \
+  ;
+  # echo "No test suite."
 }
+
+################################
